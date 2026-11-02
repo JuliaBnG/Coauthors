@@ -1,0 +1,16 @@
+# Merged into the site's docker-compose.yml (same compose project, so
+# `www` reaches the API as http://review:8000). `:z` relabels for SELinux.
+services:
+  review:
+    image: python:3.12-alpine
+    restart: unless-stopped
+    user: "1000:1000"
+    command: ["python3", "/srv/review_server.py", "serve", "--db", "/data/review.sqlite"]
+    volumes:
+      - ../review/review_server.py:/srv/review_server.py:ro,z
+      - ../review/data:/data:z
+
+  www:                                  # existing service; add the second volume
+    volumes:
+      - ../www:/usr/share/nginx/html:ro
+      - ../review/www-default.conf:/etc/nginx/conf.d/default.conf:ro,z

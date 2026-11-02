@@ -1,0 +1,10 @@
+__pycache__/
+*.key
+*.sqlite*
+/out/
+# private: per-paper settings (secret draft URLs), discussions, local notes
+/papers/*.toml
+!/papers/example.toml
+/archive/
+*.local.md
+/t.txt

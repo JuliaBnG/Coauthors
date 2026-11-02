@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Run the coauthors tool from anywhere: ln -s "$PWD/bin/coauthors" ~/.local/bin/
+here=$(dirname "$(readlink -f "$0")")
+PYTHONPATH="$here/.." exec python3 -m coauthors "$@"

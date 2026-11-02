@@ -1,0 +1,35 @@
+# Template: copy to papers/<id>.toml (ignored by git) and edit.
+# `coauthors <command> <id>` reads papers/<id>.toml.
+id = "example"                              # also the API namespace; a-z, 0-9, '-'
+title = "Example draft"                     # <title> of the page
+
+# The paper's repository and the manuscript inside it. Rounds are rendered
+# from a commit of this repository (a temporary worktree), never from the
+# working tree, so every round has an exact, reproducible base.
+repo = "~/path/to/paper-repo"
+dir = "manuscript"
+sections = ["front.md", "introduction.md", "methods.md", "results.md", "discussion.md"]
+references = true                           # append "## References" + ::: {#refs}
+bibliography = "references.bib"
+figure_pdf_to_png = false                   # (fig/x.pdf) -> (fig/x.png) on the page only
+
+# Optional, all relative to `dir`, all read from the round's commit.
+build = "./build.sh"                        # run first, e.g. to make manuscript.pdf
+pdf = { from = "manuscript.pdf", to = "example-draft.pdf" }   # or a list of these
+assets = ["fig/*.png"]
+# css = "style.css"
+# banner = "banner.html"                    # a file in the paper repo, or:
+# {date} is the publish date, {round} the review round.
+banner_html = """
+<div class="banner">
+<p><strong>Working draft for co-authors, {date} (review round {round}).
+Please do not circulate.</strong> <a href="example-draft.pdf">PDF version</a>.</p>
+</div>
+"""
+
+# Where the page goes (rsync target, with --delete) and where it is read.
+# Use a long random path component: it is what keeps the draft unlisted.
+#   python3 -c 'import secrets; print(secrets.token_urlsafe(22))'
+dest = "server:/srv/www/progress/<random>/example/"
+url = "https://example.org/progress/<random>/example/"
+api = "https://example.org/review-api"
