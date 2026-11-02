@@ -137,10 +137,18 @@ a round.
 The PDF is made by the paper's `build` command in the same worktree, so
 the PDF and the HTML always come from the same commit.
 
+## Paper template
+
+`PAPER_TEMPLATE.md` is an editable, discipline-neutral manuscript
+starter for co-authors. Copy it into the paper repository, replace the
+bracketed prompts with the paper's content, and split it into the
+section files that a paper's `sections` lists.
+
 ## Files
 
 | Path | Role |
 |---|---|
+| `PAPER_TEMPLATE.md` | manuscript starter (see above) |
 | `papers/<id>.toml` | per-paper settings (local; `papers/example.toml` is the template): repo, sections, assets, PDFs (one or a list), banner (a file in the paper repo, or `banner_html` with `{date}` and `{round}`), destination, API |
 | `coauthors/` | the `coauthors` command (Python ≥ 3.11, stdlib only; pandoc, git, rsync) |
 | `assets/review.js`, `assets/review.css` | the review layer on the page; no dependencies |
